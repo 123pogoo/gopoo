@@ -205,13 +205,8 @@ body {
 .product-header h1 {
     font-size: 1.5rem;
     color: var(--dark-color);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0;
     line-height: 1.3;
-}
-
-.product-subtitle {
-    font-size: 0.9rem;
-    color: #999;
 }
 
 /* ===========================
