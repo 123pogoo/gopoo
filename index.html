@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>無線充電架 - GOPOO 官方商城</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 導航欄 -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="logo">GOPOO</div>
+            <div class="nav-links">
+                <a href="#product">商品</a>
+                <a href="#reviews">評價</a>
+                <a href="#contact">聯絡我們</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要內容 -->
+    <main class="container">
+        <!-- 產品展示區 -->
+        <section class="product-section">
+            <!-- 左側：產品圖片輪播 -->
+            <div class="product-gallery">
+                <div class="main-image">
+                    <img id="mainImage" src="images/无线充电架_01.jpg" alt="無線充電架">
+                    <div class="image-badge">熱銷商品</div>
+                </div>
+                
+                <!-- 縮圖導航 -->
+                <div class="thumbnail-container">
+                    <div class="thumbnail-scroll">
+                        <img class="thumbnail active" src="images/无线充电架_01.jpg" alt="圖1" onclick="changeImage(this)">
+                        <img class="thumbnail" src="images/无线充电架_02.jpg" alt="圖2" onclick="changeImage(this)">
+                        <img class="thumbnail" src="images/无线充电架_03.jpg" alt="圖3" onclick="changeImage(this)">
+                        <img class="thumbnail" src="images/无线充电架_04.jpg" alt="圖4" onclick="changeImage(this)">
+                        <img class="thumbnail" src="images/无线充电架_05.jpg" alt="圖5" onclick="changeImage(this)">
+                        <img class="thumbnail" src="images/无线充电架_06.jpg" alt="圖6" onclick="changeImage(this)">
+                        <img class="thumbnail" src="images/无线充电架_07.jpg" alt="圖7" onclick="changeImage(this)">
+                        <img class="thumbnail" src="images/无线充电架_08.jpg" alt="圖8" onclick="changeImage(this)">
+                        <img class="thumbnail" src="images/无线充电架_09.jpg" alt="圖9" onclick="changeImage(this)">
+                        <img class="thumbnail" src="images/无线充电架_10.jpg" alt="圖10" onclick="changeImage(this)">
+                        <img class="thumbnail" src="images/无线充电架_11.jpg" alt="圖11" onclick="changeImage(this)">
+                        <img class="thumbnail" src="images/无线充电架_12.jpg" alt="圖12" onclick="changeImage(this)">
+                        <img class="thumbnail" src="images/无线充电架_13.jpg" alt="圖13" onclick="changeImage(this)">
+                        <img class="thumbnail" src="images/无线充电架_14.jpg" alt="圖14" onclick="changeImage(this)">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右側：產品信息和購買 -->
+            <div class="product-info">
+                <h1 class="product-title">無線充電架</h1>
+                
+                <!-- 評分 -->
+                <div class="rating">
+                    <div class="stars">★★★★★</div>
+                    <span class="rating-text">4.8 (2,847 評價)</span>
+                </div>
+
+                <!-- 價格 -->
+                <div class="price-section">
+                    <div class="price-item">
+                        <span class="original-price">NT$1,299</span>
+                        <span class="current-price">NT$899</span>
+                        <span class="discount">-31%</span>
+                    </div>
+                </div>
+
+                <!-- 信任標籤 -->
+                <div class="trust-badges">
+                    <div class="badge">✓ 100% 正品保障</div>
+                    <div class="badge">✓ 免運費</div>
+                    <div class="badge">✓ 貨到付款</div>
+                    <div class="badge">✓ 7 天無理由退貨</div>
+                </div>
+
+                <!-- 產品描述 -->
+                <div class="product-description">
+                    <h3>產品特點</h3>
+                    <ul>
+                        <li>✓ 智能感應，自動對齊充電</li>
+                        <li>✓ 相容所有 Qi 標準設備</li>
+                        <li>✓ 防滑矽膠墊，保護您的設備</li>
+                        <li>✓ 快速充電，最快 30 分鐘充滿</li>
+                        <li>✓ 精美設計，提升居家品味</li>
+                        <li>✓ 多角度調整，滿足各種使用場景</li>
+                    </ul>
+                </div>
+
+                <!-- 選項選擇 -->
+                <div class="options-section">
+                    <!-- 顏色選擇 -->
+                    <div class="option-group">
+                        <label>顏色選擇：</label>
+                        <div class="color-options">
+                            <button class="color-btn active" data-color="黑色" style="background-color: #000;"></button>
+                            <button class="color-btn" data-color="白色" style="background-color: #fff; border: 1px solid #ccc;"></button>
+                            <button class="color-btn" data-color="銀色" style="background-color: #c0c0c0;"></button>
+                            <button class="color-btn" data-color="金色" style="background-color: #ffd700;"></button>
+                        </div>
+                        <span class="selected-color">已選擇：黑色</span>
+                    </div>
+
+                    <!-- 套餐選擇 -->
+                    <div class="option-group">
+                        <label>套餐選擇：</label>
+                        <div class="package-options">
+                            <button class="package-btn active" data-package="單件" data-price="899">
+                                <span class="package-name">單件</span>
+                                <span class="package-price">NT$899</span>
+                            </button>
+                            <button class="package-btn" data-package="買一送一" data-price="1299">
+                                <span class="package-name">買一送一</span>
+                                <span class="package-price">NT$1,299</span>
+                                <span class="package-badge">省NT$499</span>
+                            </button>
+                            <button class="package-btn" data-package="三件組" data-price="1999">
+                                <span class="package-name">三件組</span>
+                                <span class="package-price">NT$1,999</span>
+                                <span class="package-badge">省NT$699</span>
+                            </button>
+                            <button class="package-btn" data-package="四件組" data-price="2499">
+                                <span class="package-name">四件組</span>
+                                <span class="package-price">NT$2,499</span>
+                                <span class="package-badge">省NT$1,099</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 數量選擇 -->
+                    <div class="option-group">
+                        <label>數量：</label>
+                        <div class="quantity-selector">
+                            <button class="qty-btn" onclick="decreaseQty()">−</button>
+                            <input type="number" id="quantity" value="1" min="1" max="99">
+                            <button class="qty-btn" onclick="increaseQty()">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 購買按鈕 -->
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="addToCart()">加入購物車</button>
+                    <button class="btn btn-secondary" onclick="buyNow()">立即購買</button>
+                </div>
+
+                <!-- 配送信息 -->
+                <div class="shipping-info">
+                    <div class="info-item">
+                        <span class="icon">📦</span>
+                        <span>免運費配送</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="icon">💳</span>
+                        <span>支持貨到付款</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="icon">🔄</span>
+                        <span>7 天無理由退貨</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 詳細信息區 -->
+        <section class="details-section">
+            <div class="details-tabs">
+                <button class="tab-btn active" onclick="switchTab(event, 'specs')">規格參數</button>
+                <button class="tab-btn" onclick="switchTab(event, 'details')">詳細描述</button>
+                <button class="tab-btn" onclick="switchTab(event, 'faq')">常見問題</button>
+            </div>
+
+            <!-- 規格參數 -->
+            <div id="specs" class="tab-content active">
+                <table class="specs-table">
+                    <tr>
+                        <td>產品名稱</td>
+                        <td>無線充電架</td>
+                    </tr>
+                    <tr>
+                        <td>充電功率</td>
+                        <td>15W 快速充電</td>
+                    </tr>
+                    <tr>
+                        <td>相容設備</td>
+                        <td>所有 Qi 標準設備（iPhone 8+、Samsung 等）</td>
+                    </tr>
+                    <tr>
+                        <td>材質</td>
+                        <td>ABS + 矽膠</td>
+                    </tr>
+                    <tr>
+                        <td>尺寸</td>
+                        <td>120mm × 100mm × 80mm</td>
+                    </tr>
+                    <tr>
+                        <td>重量</td>
+                        <td>150g</td>
+                    </tr>
+                    <tr>
+                        <td>顏色</td>
+                        <td>黑色、白色、銀色、金色</td>
+                    </tr>
+                    <tr>
+                        <td>保修期</td>
+                        <td>12 個月</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- 詳細描述 -->
+            <div id="details" class="tab-content">
+                <h3>產品詳細描述</h3>
+                <p>我們的無線充電架採用最新的無線充電技術，為您提供便捷、安全的充電體驗。</p>
+                <h4>主要優勢：</h4>
+                <ul>
+                    <li><strong>智能感應技術</strong> - 自動識別設備位置，精準對齊充電區域</li>
+                    <li><strong>快速充電</strong> - 15W 功率，比傳統充電快 3 倍</li>
+                    <li><strong>多設備相容</strong> - 支持所有 Qi 標準無線充電設備</li>
+                    <li><strong>安全保護</strong> - 多重安全認證，過溫保護，過流保護</li>
+                    <li><strong>精美設計</strong> - 簡約現代風格，適合各種居家環境</li>
+                    <li><strong>靈活調整</strong> - 支持多角度調整，滿足不同使用場景</li>
+                </ul>
+            </div>
+
+            <!-- 常見問題 -->
+            <div id="faq" class="tab-content">
+                <div class="faq-item">
+                    <h4>Q: 是否支持快速充電？</h4>
+                    <p>A: 是的，我們的充電架支持 15W 快速充電，相比傳統充電快 3 倍。</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Q: 可以充電哪些設備？</h4>
+                    <p>A: 支持所有 Qi 標準無線充電設備，包括 iPhone 8 及以上、Samsung Galaxy 系列等。</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Q: 充電時會發熱嗎？</h4>
+                    <p>A: 不會。我們採用先進的溫度控制技術，充電過程中溫度始終保持在安全範圍內。</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Q: 多久能充滿？</h4>
+                    <p>A: 一般 30 分鐘左右可以充滿 50%，1 小時左右可以完全充滿。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 購買記錄 -->
+        <section class="purchase-records" id="purchase-records">
+            <h2>最新購買記錄</h2>
+            <div class="records-list">
+                <div class="record-item">
+                    <span class="record-name">林*女士</span>
+                    <span class="record-time">剛剛</span>
+                    <span class="record-package">購買了 買一送一</span>
+                </div>
+                <div class="record-item">
+                    <span class="record-name">王*先生</span>
+                    <span class="record-time">5 分鐘前</span>
+                    <span class="record-package">購買了 三件組</span>
+                </div>
+                <div class="record-item">
+                    <span class="record-name">陳*女士</span>
+                    <span class="record-time">12 分鐘前</span>
+                    <span class="record-package">購買了 單件</span>
+                </div>
+                <div class="record-item">
+                    <span class="record-name">黃*先生</span>
+                    <span class="record-time">18 分鐘前</span>
+                    <span class="record-package">購買了 買一送一</span>
+                </div>
+                <div class="record-item">
+                    <span class="record-name">李*女士</span>
+                    <span class="record-time">25 分鐘前</span>
+                    <span class="record-package">購買了 四件組</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 評價區 -->
+        <section class="reviews-section" id="reviews">
+            <h2>客戶評價</h2>
+            <div class="reviews-container">
+                <div class="review-item">
+                    <div class="review-header">
+                        <span class="review-name">林小姐</span>
+                        <span class="review-rating">★★★★★</span>
+                    </div>
+                    <p class="review-text">非常好用！充電速度快，設計也很精美，放在辦公桌上提升了整體品味。</p>
+                    <span class="review-date">2024年3月5日</span>
+                </div>
+                <div class="review-item">
+                    <div class="review-header">
+                        <span class="review-name">王先生</span>
+                        <span class="review-rating">★★★★★</span>
+                    </div>
+                    <p class="review-text">買了三個，送給朋友都說好。質量不錯，值得推薦。</p>
+                    <span class="review-date">2024年3月4日</span>
+                </div>
+                <div class="review-item">
+                    <div class="review-header">
+                        <span class="review-name">陳女士</span>
+                        <span class="review-rating">★★★★★</span>
+                    </div>
+                    <p class="review-text">客服態度很好，配送也很快。產品質量沒得說，強烈推薦！</p>
+                    <span class="review-date">2024年3月3日</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 頁腳 -->
+    <footer class="footer" id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>關於 GOPOO</h4>
+                <p>我們致力於為台灣消費者提供高品質、高性價比的電子產品。</p>
+            </div>
+            <div class="footer-section">
+                <h4>聯絡我們</h4>
+                <p>📧 Email: service@gopoo.shop</p>
+                <p>📱 WhatsApp: +886-900-000-000</p>
+                <p>💬 Line: @gopoo</p>
+            </div>
+            <div class="footer-section">
+                <h4>政策</h4>
+                <ul>
+                    <li><a href="#">隱私政策</a></li>
+                    <li><a href="#">退貨政策</a></li>
+                    <li><a href="#">服務條款</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>追蹤我們</h4>
+                <div class="social-links">
+                    <a href="#">Facebook</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">TikTok</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 GOPOO. 保留所有權利。</p>
+        </div>
+    </footer>
+
+    <!-- 購物車浮窗 -->
+    <div class="cart-float" id="cartFloat">
+        <div class="cart-count">0</div>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
