@@ -33,12 +33,14 @@
                 <div class="product-image">
                     <div class="image-gallery">
                         <img id="mainImage" src="images/product-1.png" alt="商品圖片" style="max-width: 100%; height: auto;">
-                        <div class="thumbnail-gallery">
-                            <img src="images/product-1.png" alt="圖1" onclick="changeImage(this.src)" style="cursor: pointer;">
-                            <img src="images/product-2.jpg" alt="圖2" onclick="changeImage(this.src)" style="cursor: pointer;">
-                            <img src="images/product-3.jpg" alt="圖3" onclick="changeImage(this.src)" style="cursor: pointer;">
-                            <img src="images/product-4.jpg" alt="圖4" onclick="changeImage(this.src)" style="cursor: pointer;">
-                            <img src="images/product-5.jpg" alt="圖5" onclick="changeImage(this.src)" style="cursor: pointer;">
+                        <div class="thumbnail-gallery-container">
+                            <div class="thumbnail-gallery" id="thumbnailGallery">
+                                <img src="images/product-1.png" alt="圖1" onclick="changeImage(this.src, 0)" style="cursor: pointer;" class="thumbnail-item active">
+                                <img src="images/product-2.jpg" alt="圖2" onclick="changeImage(this.src, 1)" style="cursor: pointer;" class="thumbnail-item">
+                                <img src="images/product-3.jpg" alt="圖3" onclick="changeImage(this.src, 2)" style="cursor: pointer;" class="thumbnail-item">
+                                <img src="images/product-4.jpg" alt="圖4" onclick="changeImage(this.src, 3)" style="cursor: pointer;" class="thumbnail-item">
+                                <img src="images/product-5.jpg" alt="圖5" onclick="changeImage(this.src, 4)" style="cursor: pointer;" class="thumbnail-item">
+                            </div>
                         </div>
                     </div>
                 </div>

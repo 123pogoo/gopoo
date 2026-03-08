@@ -94,8 +94,28 @@ function decreaseQuantity() {
 // 图片切换
 // ===========================
 
-function changeImage(src) {
+function changeImage(src, index) {
     document.getElementById('mainImage').src = src;
+    
+    // 更新 active 状态
+    const thumbnails = document.querySelectorAll('.thumbnail-item');
+    thumbnails.forEach((thumb, i) => {
+        if (i === index) {
+            thumb.classList.add('active');
+        } else {
+            thumb.classList.remove('active');
+        }
+    });
+    
+    // 在手机端自动滚动到当前缩图
+    if (window.innerWidth <= 768) {
+        const container = document.querySelector('.thumbnail-gallery-container');
+        const thumbnail = thumbnails[index];
+        if (thumbnail && container) {
+            const scrollLeft = thumbnail.offsetLeft - container.offsetWidth / 2 + thumbnail.offsetWidth / 2;
+            container.scrollLeft = Math.max(0, scrollLeft);
+        }
+    }
 }
 
 // ===========================
@@ -124,6 +144,12 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             submitOrder();
         });
+    }
+    
+    // 初始化第一张图片的 active 状态
+    const firstThumbnail = document.querySelector('.thumbnail-item');
+    if (firstThumbnail) {
+        firstThumbnail.classList.add('active');
     }
 });
 
