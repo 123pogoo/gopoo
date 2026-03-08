@@ -1,0 +1,138 @@
+{
+  "store": {
+    "name": "GOPOO",
+    "email": "hello@gopoo.shop",
+    "phone": "+886-2-XXXX-XXXX",
+    "description": "精選高品質商品，為您的生活增添色彩"
+  },
+  "product": {
+    "name": "商品名稱",
+    "description": "這是一個高品質的商品，具有優雅的設計和卓越的品質。",
+    "originalPrice": 1299,
+    "currentPrice": 999,
+    "rating": 4.8,
+    "category": "新品上市",
+    "colors": [
+      "黑色",
+      "白色",
+      "紅色",
+      "藍色",
+      "金色"
+    ],
+    "sizes": [
+      "小 (S)",
+      "中 (M)",
+      "大 (L)"
+    ],
+    "packages": [
+      {
+        "name": "【嘗鮮優惠 單件】",
+        "price": 999,
+        "description": "單件購買"
+      },
+      {
+        "name": "【95%人的選擇 買一送一 二件組】",
+        "price": 1299,
+        "description": "買一送一，共兩件"
+      },
+      {
+        "name": "【促銷特惠 三件組】",
+        "price": 1499,
+        "description": "三件組合優惠"
+      },
+      {
+        "name": "【限時秒殺 買二送二 四件組】",
+        "price": 1699,
+        "description": "買二送二，共四件"
+      }
+    ],
+    "images": [
+      "https://via.placeholder.com/500x500?text=商品圖片",
+      "https://via.placeholder.com/500x500?text=商品圖片2",
+      "https://via.placeholder.com/500x500?text=商品圖片3"
+    ],
+    "thumbnails": [
+      "https://via.placeholder.com/80x80?text=圖1",
+      "https://via.placeholder.com/80x80?text=圖2",
+      "https://via.placeholder.com/80x80?text=圖3"
+    ],
+    "features": [
+      "高級材質製造",
+      "精心設計",
+      "耐用持久",
+      "環保友善"
+    ],
+    "trustBadges": [
+      "100%正品保障",
+      "免費配送",
+      "貨到付款"
+    ]
+  },
+  "shipping": {
+    "methods": [
+      {
+        "id": "cod",
+        "name": "貨到付款",
+        "fee": 0
+      },
+      {
+        "id": "711",
+        "name": "7-11超商",
+        "fee": 0
+      },
+      {
+        "id": "family",
+        "name": "全家超商",
+        "fee": 0
+      }
+    ]
+  },
+  "counties": [
+    "台北市",
+    "新北市",
+    "桃園市",
+    "新竹市",
+    "苗栗縣",
+    "台中市",
+    "彰化縣",
+    "南投縣",
+    "雲林縣",
+    "嘉義市",
+    "台南市",
+    "高雄市",
+    "屏東縣",
+    "台東縣",
+    "花蓮縣",
+    "宜蘭縣",
+    "澎湖縣",
+    "金門縣",
+    "連江縣"
+  ],
+  "sampleOrders": [
+    {
+      "name": "新北王*",
+      "time": "15分鐘前",
+      "package": "【95%人的選擇 買一送一 二件組】"
+    },
+    {
+      "name": "台北武*",
+      "time": "17分鐘前",
+      "package": "【95%人的選擇 買一送一 二件組】"
+    },
+    {
+      "name": "台東吳*",
+      "time": "10分鐘前",
+      "package": "【95%人的選擇 買一送一 二件組】"
+    },
+    {
+      "name": "新北陳*",
+      "time": "8分鐘前",
+      "package": "【促銷特惠 三件組】"
+    },
+    {
+      "name": "台北劉*",
+      "time": "20分鐘前",
+      "package": "【95%人的選擇 買一送一 二件組】"
+    }
+  ]
+}
