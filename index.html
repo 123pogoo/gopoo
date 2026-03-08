@@ -53,10 +53,10 @@
                         <span class="discount-badge">火熱銷售中</span>
                     </div>
 
-                    <!-- 评分 -->
+                    <!-- 評分 -->
                     <div class="rating">
                         <span class="stars">★★★★★</span>
-                        <span class="rating-text">(4.8) 顧客好評</span>
+                        <span class="rating-text">(4.9) 8,342位顧客好評</span>
                     </div>
 
                     <!-- 信任标签 -->
@@ -70,36 +70,21 @@
                     <div class="options-section">
                         <label>選擇套餐 *</label>
                         <select id="packageSelect" onchange="updatePrice()">
-                            <option value="single" data-price="999">【嘗鮮優惠 單件】- NT$999</option>
-                            <option value="double" data-price="1299">【95%人的選擇 買一送一 二件組】- NT$1299</option>
-                            <option value="triple" data-price="1499">【促銷特惠 三件組】- NT$1499</option>
-                            <option value="quad" data-price="1699">【限時秒殺 買二送二 四件組】- NT$1699</option>
+                            <option value="single" data-price="999">【單件】- NT$999</option>
+                            <option value="double" data-price="1699">【買二組】- NT$1699</option>
+                            <option value="triple" data-price="1999">【買三組】- NT$1999</option>
                         </select>
                     </div>
 
-                    <!-- 颜色选择 -->
+                    <!-- 顏色選擇 -->
                     <div class="options-section">
-                        <label>選擇顏色 *</label>
-                        <select id="colorSelect">
-                            <option value="">-- 請選擇顏色 --</option>
-                            <option value="black">黑色</option>
-                            <option value="white">白色</option>
-                            <option value="red">紅色</option>
-                            <option value="blue">藍色</option>
-                            <option value="gold">金色</option>
-                        </select>
+                        <label>顏色：銀色</label>
+                        <div style="padding: 0.8rem; background: #f8f9fa; border-radius: 5px; color: #666;">
+                            銀色（唯一選項）
+                        </div>
                     </div>
 
-                    <!-- 尺寸选择 -->
-                    <div class="options-section">
-                        <label>選擇尺寸 *</label>
-                        <select id="sizeSelect">
-                            <option value="">-- 請選擇尺寸 --</option>
-                            <option value="s">小 (S)</option>
-                            <option value="m">中 (M)</option>
-                            <option value="l">大 (L)</option>
-                        </select>
-                    </div>
+                    <!-- 尺寸選擇已刪除 -->
 
                     <!-- 数量选择 -->
                     <div class="options-section">
@@ -135,31 +120,46 @@
     <section class="recent-orders">
         <div class="container">
             <h2>最新訂購</h2>
-            <div class="orders-list" id="ordersList">
+            <div class="orders-list">
+                <div class="order-item">
+                    <span class="order-name">台北李*</span>
+                    <span class="order-time">2分鐘前</span>
+                    <span class="order-package">【買三組】</span>
+                </div>
                 <div class="order-item">
                     <span class="order-name">新北王*</span>
-                    <span class="order-time">15分鐘前</span>
-                    <span class="order-package">【95%人的選擇 買一送一 二件組】</span>
+                    <span class="order-time">5分鐘前</span>
+                    <span class="order-package">【買二組】</span>
                 </div>
                 <div class="order-item">
-                    <span class="order-name">台北武*</span>
-                    <span class="order-time">17分鐘前</span>
-                    <span class="order-package">【95%人的選擇 買一送一 二件組】</span>
-                </div>
-                <div class="order-item">
-                    <span class="order-name">台東吳*</span>
-                    <span class="order-time">10分鐘前</span>
-                    <span class="order-package">【95%人的選擇 買一送一 二件組】</span>
-                </div>
-                <div class="order-item">
-                    <span class="order-name">新北陳*</span>
+                    <span class="order-name">桃園陳*</span>
                     <span class="order-time">8分鐘前</span>
-                    <span class="order-package">【促銷特惠 三件組】</span>
+                    <span class="order-package">【單件】</span>
                 </div>
                 <div class="order-item">
-                    <span class="order-name">台北劉*</span>
-                    <span class="order-time">20分鐘前</span>
-                    <span class="order-package">【95%人的選擇 買一送一 二件組】</span>
+                    <span class="order-name">台中吳*</span>
+                    <span class="order-time">12分鐘前</span>
+                    <span class="order-package">【買二組】</span>
+                </div>
+                <div class="order-item">
+                    <span class="order-name">高雄劉*</span>
+                    <span class="order-time">15分鐘前</span>
+                    <span class="order-package">【買三組】</span>
+                </div>
+                <div class="order-item">
+                    <span class="order-name">新竹林*</span>
+                    <span class="order-time">18分鐘前</span>
+                    <span class="order-package">【買二組】</span>
+                </div>
+                <div class="order-item">
+                    <span class="order-name">台南黃*</span>
+                    <span class="order-time">22分鐘前</span>
+                    <span class="order-package">【單件】</span>
+                </div>
+                <div class="order-item">
+                    <span class="order-name">基隆張*</span>
+                    <span class="order-time">25分鐘前</span>
+                    <span class="order-package">【買三組】</span>
                 </div>
             </div>
         </div>
