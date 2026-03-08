@@ -28,21 +28,12 @@ function updateCartCount() {
 
 // 加入购物车
 function addToCart() {
-    const package = document.getElementById('packageSelect').value;
-    const color = document.getElementById('colorSelect').value;
-    const size = document.getElementById('sizeSelect').value;
+    const packageType = document.getElementById('packageSelect').value;
     const quantity = parseInt(document.getElementById('quantity').value);
-
-    if (!color || !size) {
-        alert('請選擇顏色和尺寸！');
-        return;
-    }
 
     const item = {
         id: Date.now(),
-        package,
-        color,
-        size,
+        package: packageType,
         quantity,
         price: currentPrice
     };
@@ -69,7 +60,7 @@ function updatePrice() {
     
     currentPrice = price;
     
-    document.getElementById('currentPrice').textContent = `NT$${price.toLocaleString()}`;
+    document.querySelector('.current-price').textContent = `NT$${price.toLocaleString()}`;
     document.getElementById('summaryPrice').textContent = `NT$${price.toLocaleString()}`;
     document.getElementById('totalPrice').textContent = `NT$${price.toLocaleString()}`;
 }
@@ -98,7 +89,7 @@ function changeImage(src, index) {
     document.getElementById('mainImage').src = src;
     
     // 更新 active 状态
-    const thumbnails = document.querySelectorAll('.thumbnail-item');
+    const thumbnails = document.querySelectorAll('.thumbnail');
     thumbnails.forEach((thumb, i) => {
         if (i === index) {
             thumb.classList.add('active');
@@ -109,7 +100,7 @@ function changeImage(src, index) {
     
     // 在手机端自动滚动到当前缩图
     if (window.innerWidth <= 768) {
-        const container = document.querySelector('.thumbnail-gallery-container');
+        const container = document.querySelector('.thumbnail-nav');
         const thumbnail = thumbnails[index];
         if (thumbnail && container) {
             const scrollLeft = thumbnail.offsetLeft - container.offsetWidth / 2 + thumbnail.offsetWidth / 2;
@@ -121,10 +112,6 @@ function changeImage(src, index) {
 // ===========================
 // 页面滚动
 // ===========================
-
-function scrollToProduct() {
-    document.getElementById('product').scrollIntoView({ behavior: 'smooth' });
-}
 
 function scrollToCheckout() {
     document.querySelector('.checkout-section').scrollIntoView({ behavior: 'smooth' });
@@ -147,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // 初始化第一张图片的 active 状态
-    const firstThumbnail = document.querySelector('.thumbnail-item');
+    const firstThumbnail = document.querySelector('.thumbnail');
     if (firstThumbnail) {
         firstThumbnail.classList.add('active');
     }
@@ -200,17 +187,17 @@ function submitOrder() {
 function addRecentOrder() {
     const names = ['新北王*', '台北武*', '台東吳*', '新北陳*', '台北劉*', '高雄陳*', '花蓮艾*'];
     const packages = [
-        '【95%人的選擇 買一送一 二件組】',
-        '【嘗鮮優惠 單件】',
-        '【促銷特惠 三件組】',
-        '【限時秒殺 買二送二 四件組】'
+        '【買三組】',
+        '【單件】',
+        '【買二組】',
+        '【買三組】'
     ];
 
     const randomName = names[Math.floor(Math.random() * names.length)];
     const randomPackage = packages[Math.floor(Math.random() * packages.length)];
     const time = '剛剛';
 
-    const ordersList = document.getElementById('ordersList');
+    const ordersContainer = document.getElementById('ordersContainer');
     const newOrder = document.createElement('div');
     newOrder.className = 'order-item';
     newOrder.innerHTML = `
@@ -219,11 +206,11 @@ function addRecentOrder() {
         <span class="order-package">${randomPackage}</span>
     `;
 
-    ordersList.insertBefore(newOrder, ordersList.firstChild);
+    ordersContainer.insertBefore(newOrder, ordersContainer.firstChild);
 
     // 保持最多显示 20 条
-    while (ordersList.children.length > 20) {
-        ordersList.removeChild(ordersList.lastChild);
+    while (ordersContainer.children.length > 20) {
+        ordersContainer.removeChild(ordersContainer.lastChild);
     }
 }
 

@@ -3,129 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GOPOO - 高品质商品在线商店</title>
+    <title>GOPOO - Qi2 旋轉魔方三合一無線充電器</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- 导航栏 -->
+    <!-- 顶部导航栏 -->
     <nav class="navbar">
-        <div class="container">
+        <div class="navbar-content">
             <div class="logo">pogoo</div>
-            <div class="nav-links">
-                <a href="#home">首頁</a>
-                <a href="#product">商品</a>
-                <a href="#contact">聯繫</a>
-                <a href="#cart" class="cart-link">🛒 購物車 <span class="cart-count">0</span></a>
+            <div class="nav-right">
+                <a href="#" class="cart-icon">🛒 <span class="cart-count">0</span></a>
             </div>
         </div>
     </nav>
 
-    <!-- 顶部横幅已删除 -->
-
-    <!-- 产品展示区 -->
-    <section id="product" class="product-section">
-        <div class="container">
-            <h2>我們的商品</h2>
+    <!-- 主要产品展示区 -->
+    <main class="main-container">
+        <!-- 产品图片轮播 -->
+        <section class="product-gallery">
+            <div class="gallery-container">
+                <img id="mainImage" src="images/product-1.png" alt="Qi2 旋轉魔方三合一無線充電器" class="main-image">
+            </div>
             
-            <!-- 产品主体 -->
-            <div class="product-main">
-                <!-- 产品图片 -->
-                <div class="product-image">
-                    <div class="image-gallery">
-                        <img id="mainImage" src="images/product-1.png" alt="商品圖片" style="max-width: 100%; height: auto;">
-                        <div class="thumbnail-gallery-container">
-                            <div class="thumbnail-gallery" id="thumbnailGallery">
-                                <img src="images/product-1.png" alt="圖1" onclick="changeImage(this.src, 0)" style="cursor: pointer;" class="thumbnail-item active">
-                                <img src="images/product-2.jpg" alt="圖2" onclick="changeImage(this.src, 1)" style="cursor: pointer;" class="thumbnail-item">
-                                <img src="images/product-3.jpg" alt="圖3" onclick="changeImage(this.src, 2)" style="cursor: pointer;" class="thumbnail-item">
-                                <img src="images/product-4.jpg" alt="圖4" onclick="changeImage(this.src, 3)" style="cursor: pointer;" class="thumbnail-item">
-                                <img src="images/product-5.jpg" alt="圖5" onclick="changeImage(this.src, 4)" style="cursor: pointer;" class="thumbnail-item">
-                            </div>
-                        </div>
-                    </div>
+            <!-- 缩图导航 -->
+            <div class="thumbnail-nav">
+                <img src="images/product-1.png" alt="圖1" class="thumbnail active" onclick="changeImage(this.src, 0)">
+                <img src="images/product-2.jpg" alt="圖2" class="thumbnail" onclick="changeImage(this.src, 1)">
+                <img src="images/product-3.jpg" alt="圖3" class="thumbnail" onclick="changeImage(this.src, 2)">
+                <img src="images/product-4.jpg" alt="圖4" class="thumbnail" onclick="changeImage(this.src, 3)">
+                <img src="images/product-5.jpg" alt="圖5" class="thumbnail" onclick="changeImage(this.src, 4)">
+            </div>
+        </section>
+
+        <!-- 价格信息区 -->
+        <section class="price-banner">
+            <div class="price-content">
+                <div class="price-main">
+                    <span class="current-price">NT$999</span>
+                    <span class="original-price">NT$1,299</span>
                 </div>
+                <div class="sales-badge">火熱銷售中</div>
+            </div>
+        </section>
 
-                <!-- 产品信息 -->
-                <div class="product-info">
-                    <div class="product-category">新品上市</div>
-                    <h1 id="productName">Qi2 旋轉魔方三合一無線充電器</h1>
-                    
-                    <!-- 价格 -->
-                    <div class="price-section">
-                        <span class="original-price" id="originalPrice">NT$1,299</span>
-                        <span class="current-price" id="currentPrice">NT$999</span>
-                        <span class="discount-badge">火熱銷售中</span>
-                    </div>
+        <!-- 产品标题 -->
+        <section class="product-header">
+            <h1>Qi2 旋轉魔方三合一無線充電器</h1>
+            <p class="product-subtitle">金絲楠雙圈十二生肖軟木國潮手鏈</p>
+        </section>
 
-                    <!-- 評分 -->
-                    <div class="rating">
-                        <span class="stars">★★★★★</span>
-                        <span class="rating-text">(4.9) 8,342位顧客好評</span>
-                    </div>
+        <!-- 信任标签 -->
+        <section class="trust-section">
+            <div class="trust-item">
+                <span class="trust-icon">🔄</span>
+                <span class="trust-text">回收利用</span>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon">📦</span>
+                <span class="trust-text">免費配送</span>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon">✓</span>
+                <span class="trust-text">正品保障</span>
+            </div>
+        </section>
 
-                    <!-- 信任标签 -->
-                    <div class="trust-badges">
-                        <span class="badge">✓ 100%正品保障</span>
-                        <span class="badge">✓ 免費配送</span>
-                        <span class="badge">✓ 貨到付款</span>
-                    </div>
+        <!-- 评分 -->
+        <section class="rating-section">
+            <div class="stars">★★★★★</div>
+            <span class="rating-text">(4.8)</span>
+            <span class="review-count">8,342位顧客好評</span>
+        </section>
 
-                    <!-- 套餐选择 -->
-                    <div class="options-section">
-                        <label>選擇套餐 *</label>
-                        <select id="packageSelect" onchange="updatePrice()">
-                            <option value="single" data-price="999">【單件】- NT$999</option>
-                            <option value="double" data-price="1699">【買二組】- NT$1699</option>
-                            <option value="triple" data-price="1999">【買三組】- NT$1999</option>
-                        </select>
-                    </div>
+        <!-- 产品保证 -->
+        <section class="guarantee-section">
+            <p>保證100%正品，物超所值！先買先得！</p>
+        </section>
 
-                    <!-- 顏色選擇 -->
-                    <div class="options-section">
-                        <label>顏色：銀色</label>
-                        <div style="padding: 0.8rem; background: #f8f9fa; border-radius: 5px; color: #666;">
-                            銀色（唯一選項）
-                        </div>
-                    </div>
+        <!-- 产品选项 -->
+        <section class="options-section">
+            <!-- 套餐选择 -->
+            <div class="option-group">
+                <label>選擇套餐 *</label>
+                <select id="packageSelect" onchange="updatePrice()">
+                    <option value="single" data-price="999">【單件】- NT$999</option>
+                    <option value="double" data-price="1699">【買二組】- NT$1699</option>
+                    <option value="triple" data-price="1999">【買三組】- NT$1999</option>
+                </select>
+            </div>
 
-                    <!-- 尺寸選擇已刪除 -->
+            <!-- 颜色选择 -->
+            <div class="option-group">
+                <label>顏色：銀色</label>
+                <div class="color-display">銀色（唯一選項）</div>
+            </div>
 
-                    <!-- 数量选择 -->
-                    <div class="options-section">
-                        <label>數量</label>
-                        <div class="quantity-selector">
-                            <button onclick="decreaseQuantity()">-</button>
-                            <input type="number" id="quantity" value="1" min="1">
-                            <button onclick="increaseQuantity()">+</button>
-                        </div>
-                    </div>
-
-                    <!-- 加入购物车按钮 -->
-                    <button class="btn btn-add-cart" onclick="addToCart()">加入購物車</button>
-                    <button class="btn btn-buy-now" onclick="buyNow()">立即購買</button>
-
-                    <!-- 产品描述 -->
-                    <div class="product-description">
-                        <h3>商品詳情</h3>
-                        <p id="productDesc">Qi2認證 15W極速快充，一鍵旋轉同時充三台不發熱。觸控旋轉 + 雙彈出設計，藍光氛圍燈療癒夜間充電。</p>
-                        <ul>
-                            <li>✓ Qi2認證 15W極速快充</li>
-                            <li>✓ 手機/耳機/手錶一機三用</li>
-                            <li>✓ 觸控旋轉 + 雙彈出設計</li>
-                            <li>✓ 藍光氛圍燈療癒夜間充電</li>
-                            <li>✓ 台灣現貨 1年保固</li>
-                        </ul>
-                    </div>
+            <!-- 数量选择 -->
+            <div class="option-group">
+                <label>數量</label>
+                <div class="quantity-control">
+                    <button onclick="decreaseQuantity()">−</button>
+                    <input type="number" id="quantity" value="1" min="1" readonly>
+                    <button onclick="increaseQuantity()">+</button>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- 最新订购列表 -->
-    <section class="recent-orders">
-        <div class="container">
+        <!-- 主要 CTA 按钮 -->
+        <section class="cta-section">
+            <button class="btn btn-primary" onclick="buyNow()">立即訂購</button>
+            <button class="btn btn-secondary" onclick="addToCart()">加入購物車</button>
+        </section>
+
+        <!-- 产品详情 -->
+        <section class="product-details">
+            <h2>商品詳情</h2>
+            <div class="details-content">
+                <p>Qi2認證 15W極速快充，一鍵旋轉同時充三台不發熱。觸控旋轉 + 雙彈出設計，藍光氛圍燈療癒夜間充電。</p>
+                
+                <div class="details-image">
+                    <img src="images/product-2.jpg" alt="產品詳情圖1">
+                </div>
+
+                <h3>核心特點</h3>
+                <ul class="features-list">
+                    <li>✓ Qi2認證 15W極速快充</li>
+                    <li>✓ 手機/耳機/手錶一機三用</li>
+                    <li>✓ 觸控旋轉 + 雙彈出設計</li>
+                    <li>✓ 藍光氛圍燈療癒夜間充電</li>
+                    <li>✓ 台灣現貨 1年保固</li>
+                </ul>
+
+                <div class="details-image">
+                    <img src="images/product-3.jpg" alt="產品詳情圖2">
+                </div>
+            </div>
+        </section>
+
+        <!-- 最新订购 -->
+        <section class="recent-orders">
             <h2>最新訂購</h2>
-            <div class="orders-list">
+            <div class="orders-container" id="ordersContainer">
                 <div class="order-item">
                     <span class="order-name">台北李*</span>
                     <span class="order-time">2分鐘前</span>
@@ -151,28 +169,11 @@
                     <span class="order-time">15分鐘前</span>
                     <span class="order-package">【買三組】</span>
                 </div>
-                <div class="order-item">
-                    <span class="order-name">新竹林*</span>
-                    <span class="order-time">18分鐘前</span>
-                    <span class="order-package">【買二組】</span>
-                </div>
-                <div class="order-item">
-                    <span class="order-name">台南黃*</span>
-                    <span class="order-time">22分鐘前</span>
-                    <span class="order-package">【單件】</span>
-                </div>
-                <div class="order-item">
-                    <span class="order-name">基隆張*</span>
-                    <span class="order-time">25分鐘前</span>
-                    <span class="order-package">【買三組】</span>
-                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- 订单表单 -->
-    <section class="checkout-section">
-        <div class="container">
+        <!-- 订单表单 -->
+        <section class="checkout-section">
             <h2>確認訂單</h2>
             <form id="orderForm" class="order-form">
                 <div class="form-group">
@@ -247,44 +248,27 @@
 
                 <button type="submit" class="btn btn-submit">確認下單</button>
             </form>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <!-- 页脚 -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>關於我們</h4>
-                    <p>GOPOO 致力於為您提供最優質的商品和服務。</p>
-                </div>
-                <div class="footer-section">
-                    <h4>商店政策</h4>
-                    <ul>
-                        <li><a href="#">退貨政策</a></li>
-                        <li><a href="#">運費政策</a></li>
-                        <li><a href="#">隱私政策</a></li>
-                        <li><a href="#">條款和條件</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>社交媒體</h4>
-                    <ul>
-                        <li><a href="https://lin.ee/jkORc9P" target="_blank">💬 Line</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>联繁我们</h4>
-                    <p><a href="https://lin.ee/jkORc9P" target="_blank" style="color: white; text-decoration: none;">💬 Line: 點擊賯話</a></p>
-                </div>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>關於我們</h4>
+                <p>GOPOO 致力於為您提供最優質的商品和服務。</p>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 GOPOO. 版權所有。</p>
+            <div class="footer-section">
+                <h4>聯繫我們</h4>
+                <p><a href="https://lin.ee/jkORc9P" target="_blank">💬 Line 客服</a></p>
             </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 GOPOO. 版權所有。</p>
         </div>
     </footer>
 
-    <!-- Line 客服按钮 -->
+    <!-- Line 客服浮动按钮 -->
     <div class="line-chat-button">
         <a href="https://lin.ee/jkORc9P" target="_blank" title="Line 客服">
             <svg width="40" height="40" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
