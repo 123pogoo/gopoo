@@ -616,6 +616,86 @@ body {
     width: auto;
 }
 
+/* 配送方式选项 */
+.shipping-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.shipping-option {
+    display: flex;
+    align-items: center;
+}
+
+.shipping-option input[type="radio"] {
+    width: auto;
+    margin-right: 0.8rem;
+    cursor: pointer;
+}
+
+.shipping-option label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    flex: 1;
+    font-weight: normal;
+    margin-bottom: 0;
+}
+
+.shipping-icon {
+    font-size: 1.3rem;
+}
+
+.shipping-name {
+    font-size: 0.95rem;
+    color: var(--text-color);
+}
+
+.shipping-info {
+    background: #fff5f7;
+    padding: 0.8rem;
+    border-radius: 5px;
+    margin-top: 0.8rem;
+    font-size: 0.9rem;
+    color: var(--primary-color);
+}
+
+/* 手机号码错误提示 */
+.phone-error {
+    color: #dc3545;
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
+    min-height: 1.2rem;
+}
+
+/* 门市列表 */
+.store-list {
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    max-height: 200px;
+    overflow-y: auto;
+    margin-top: 0.5rem;
+}
+
+.store-item {
+    padding: 0.8rem;
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.store-item:hover {
+    background: #f8f9fa;
+    color: var(--primary-color);
+}
+
+.store-item:last-child {
+    border-bottom: none;
+}
+
 /* 订单总结 */
 .order-summary {
     background: #f8f9fa;
@@ -687,6 +767,46 @@ body {
     padding-top: 2rem;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     opacity: 0.7;
+}
+
+/* ===========================
+   Line 客服按钮
+   =========================== */
+
+/* ===========================
+   浮动"立即訂購"按钮
+   =========================== */
+
+.floating-buy-button {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    left: 20px;
+    z-index: 998;
+    display: none;
+}
+
+.floating-buy-button.show {
+    display: block;
+}
+
+.floating-buy-button button {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(255, 107, 157, 0.4);
+    transition: all 0.3s;
+}
+
+.floating-buy-button button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(255, 107, 157, 0.6);
 }
 
 /* ===========================

@@ -30,7 +30,7 @@
         <section class="price-banner">
             <div class="price-content">
                 <div class="price-main">
-                    <span class="current-price">NT$999</span>
+                    <span class="current-price" id="displayPrice">NT$999</span>
                     <span class="original-price">NT$1,299</span>
                 </div>
                 <div class="sales-badge">火熱銷售中</div>
@@ -92,9 +92,9 @@
             <div class="option-group">
                 <label>數量</label>
                 <div class="quantity-control">
-                    <button onclick="decreaseQuantity()">−</button>
+                    <button type="button" onclick="decreaseQuantity()">−</button>
                     <input type="number" id="quantity" value="1" min="1" readonly>
-                    <button onclick="increaseQuantity()">+</button>
+                    <button type="button" onclick="increaseQuantity()">+</button>
                 </div>
             </div>
         </section>
@@ -180,20 +180,42 @@
                 <div class="form-group">
                     <label>手機 *</label>
                     <input type="tel" id="phone" placeholder="請填寫您的行動電話" required>
+                    <div class="phone-error" id="phoneError"></div>
                 </div>
 
                 <div class="form-group">
                     <label>配送方式 *</label>
-                    <div class="radio-group">
-                        <label><input type="radio" name="shipping" value="cod" checked> 貨到付款</label>
-                        <label><input type="radio" name="shipping" value="711"> 7-11超商</label>
-                        <label><input type="radio" name="shipping" value="family"> 全家超商</label>
+                    <div class="shipping-options">
+                        <div class="shipping-option">
+                            <input type="radio" id="shipping-cod" name="shipping" value="cod" checked onchange="updateShippingInfo()">
+                            <label for="shipping-cod">
+                                <span class="shipping-icon">🚚</span>
+                                <span class="shipping-name">貨到付款</span>
+                            </label>
+                        </div>
+                        <div class="shipping-option">
+                            <input type="radio" id="shipping-711" name="shipping" value="711" onchange="updateShippingInfo()">
+                            <label for="shipping-711">
+                                <span class="shipping-icon">🏪</span>
+                                <span class="shipping-name">7-11超商</span>
+                            </label>
+                        </div>
+                        <div class="shipping-option">
+                            <input type="radio" id="shipping-family" name="shipping" value="family" onchange="updateShippingInfo()">
+                            <label for="shipping-family">
+                                <span class="shipping-icon">🏬</span>
+                                <span class="shipping-name">全家超商</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="shipping-info" id="shippingInfo">
+                        <p>✓ 全台配送</p>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label>縣市 *</label>
-                    <select id="county" required>
+                    <select id="county" required onchange="updateDistricts()">
                         <option value="">-- 選擇縣市 --</option>
                         <option value="taipei">台北市</option>
                         <option value="newtaipei">新北市</option>
@@ -215,6 +237,19 @@
                         <option value="kinmen">金門縣</option>
                         <option value="lienchiang">連江縣</option>
                     </select>
+                </div>
+
+                <div class="form-group" id="districtGroup" style="display:none;">
+                    <label>地區 *</label>
+                    <select id="district" required>
+                        <option value="">-- 選擇地區 --</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="storeGroup" style="display:none;">
+                    <label>門市 *</label>
+                    <input type="text" id="store" placeholder="查詢門市..." readonly>
+                    <div class="store-list" id="storeList"></div>
                 </div>
 
                 <div class="form-group">
@@ -263,6 +298,11 @@
             <p>&copy; 2026 GOPOO. 版權所有。</p>
         </div>
     </footer>
+
+    <!-- 浮动"立即訂購"按钮 -->
+    <div class="floating-buy-button" id="floatingBuyButton">
+        <button onclick="scrollToCheckout()">立即訂購</button>
+    </div>
 
     <!-- Line 客服浮动按钮 -->
     <div class="line-chat-button">
