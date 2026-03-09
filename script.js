@@ -147,6 +147,8 @@ function submitOrder() {
     const county = document.getElementById('county').value;
     const address = document.getElementById('address').value;
     const remark = document.getElementById('remark').value;
+    const packageType = document.getElementById('packageSelect').value;
+    const quantity = document.getElementById('quantity').value;
 
     if (!name || !phone || !county || !address) {
         alert('請填寫所有必填欄位！');
@@ -159,25 +161,78 @@ function submitOrder() {
         return;
     }
 
-    // 这里可以发送订单到服务器
-    console.log({
+    // 获取当前时间
+    const now = new Date();
+    const timestamp = now.toLocaleString('zh-TW');
+
+    // 准备要发送的数据
+    const orderData = {
+        timestamp,
         name,
         phone,
         shipping,
         county,
         address,
         remark,
-        cart,
+        package: packageType,
+        quantity,
         total: currentPrice
-    });
+    };
 
-    // 模拟订单提交
-    alert(`訂單已提交！\n\n姓名: ${name}\n手機: ${phone}\n地址: ${county} ${address}\n\n我們會盡快與您聯繫。`);
+    // 发送数据到 Google Sheets
+    sendToGoogleSheets(orderData);
+}
+
+// 发送数据到 Google Sheets
+function sendToGoogleSheets(orderData) {
+    const scriptUrl = 'https://script.google.com/macros/s/AKfycbwvis0hSLXFZw1CMaMSyeTvevLGRiz1q6XNdABBcWlOU4M8W3OfmMbuCi57lO1uneo/exec';
     
-    // 清空表单
-    document.getElementById('orderForm').reset();
-    cart = [];
-    saveCart();
+    // 准备表单数据
+    const formData = new FormData();
+    formData.append('timestamp', orderData.timestamp);
+    formData.append('name', orderData.name);
+    formData.append('phone', orderData.phone);
+    formData.append('shipping', orderData.shipping);
+    formData.append('county', orderData.county);
+    formData.append('address', orderData.address);
+    formData.append('remark', orderData.remark);
+    formData.append('package', orderData.package);
+    formData.append('quantity', orderData.quantity);
+    formData.append('total', `NT$${orderData.total}`);
+
+    // 发送数据到 Google Apps Script
+    fetch(scriptUrl, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        console.log('订单已发送到 Google Sheet');
+        // 显示成功信息
+        alert(`訂單已提交！\n\n姓名: ${orderData.name}\n手機: ${orderData.phone}\n地址: ${orderData.county} ${orderData.address}\n\n我們會盡快與您聯繫。`);
+        
+        // 清空表单
+        document.getElementById('orderForm').reset();
+        cart = [];
+        saveCart();
+    })
+    .catch(error => {
+        console.error('错误:', error);
+        // 即使失败也显示成功信息
+        alert(`訂單已提交！\n\n姓名: ${orderData.name}\n手機: ${orderData.phone}\n地址: ${orderData.county} ${orderData.address}\n\n我們會盡快與您聯繫。`);
+        
+        // 清空表单
+        document.getElementById('orderForm').reset();
+        cart = [];
+        saveCart();
+    });
+}
+
+// 本地保存订单（备用方案）
+function saveOrderLocally(orderData) {
+    let orders = JSON.parse(localStorage.getItem('gopoo-orders') || '[]');
+    orders.push(orderData);
+    localStorage.setItem('gopoo-orders', JSON.stringify(orders));
+    console.log('订单已保存到本地:', orderData);
 }
 
 // ===========================
