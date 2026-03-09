@@ -194,7 +194,7 @@ function submitOrder() {
 
 // 发送数据到 Google Sheets
 function sendToGoogleSheets(orderData) {
-    const scriptUrl = 'https://script.google.com/macros/s/AKfycbzOt6prAhoMu58jrDDkX4PNYYB0fVLjWY9_DhppCV9VEgJtmb98TlcQC-XeR5kA1VDH/exec';
+    const scriptUrl = 'https://script.google.com/macros/s/AKfycbxunlh6XM0OzR1-kS3WckwnAFXR9nLDYMpCCvAwXYRya_sltXgvxuL1Ov66VPWP_2kU/exec';
     
     // 准备表单数据
     const formData = new FormData();
