@@ -666,6 +666,18 @@ function submitOrder() {
         quantity,
         total
     };
+    
+    // 跟踪 Facebook 购买事件
+    if (typeof fbq !== 'undefined') {
+        fbq('track', 'Purchase', {
+            value: total,
+            currency: 'TWD',
+            content_name: packageType,
+            content_type: 'product',
+            content_ids: [packageType]
+        });
+    }
+    
     // 发送数据到 Google Sheets
     sendToGoogleSheets(orderData);
 }
