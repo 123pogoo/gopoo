@@ -178,21 +178,33 @@ document.addEventListener('DOMContentLoaded', function() {
 function updateShippingInfo() {
     const shippingInfo = document.getElementById('shippingInfo');
     const shippingValue = document.querySelector('input[name="shipping"]:checked').value;
+    const addressGroup = document.getElementById('addressGroup');
+    const addressInput = document.getElementById('address');
     
     if (shippingValue === 'cod') {
         shippingInfo.innerHTML = '<p>✓ 全台配送</p>';
         document.getElementById('districtGroup').style.display = 'none';
         document.getElementById('storeGroup').style.display = 'none';
+        // 显示詳細地址输入框
+        addressGroup.style.display = 'block';
+        // 移除只读属性
+        addressInput.removeAttribute('readonly');
+        // 清空地址
+        addressInput.value = '';
     } else if (shippingValue === '711') {
         shippingInfo.innerHTML = '<p>✓ 7-11 超商配送</p>';
         document.getElementById('districtGroup').style.display = 'block';
         document.getElementById('storeGroup').style.display = 'block';
         document.getElementById('store').placeholder = '選擇 7-11 門市...';
+        // 隐藏詳細地址输入框
+        addressGroup.style.display = 'none';
     } else if (shippingValue === 'family') {
         shippingInfo.innerHTML = '<p>✓ 全家超商配送</p>';
         document.getElementById('districtGroup').style.display = 'block';
         document.getElementById('storeGroup').style.display = 'block';
         document.getElementById('store').placeholder = '選擇全家門市...';
+        // 隐藏詳細地址输入框
+        addressGroup.style.display = 'none';
     }
 }
 
@@ -487,16 +499,37 @@ function displayStores(stores, shippingType) {
     });
     
     // 添加选择事件监听
-    storeSelect.addEventListener('change', function() {
-        if (this.value !== '') {
-            const selectedOption = this.options[this.selectedIndex];
-            const address = selectedOption.dataset.address;
-            storeAddressText.textContent = address;
-            storeAddress.style.display = 'block';
-        } else {
-            storeAddress.style.display = 'none';
-        }
-    });
+    storeSelect.removeEventListener('change', storeSelectChangeHandler);
+    storeSelect.addEventListener('change', storeSelectChangeHandler);
+}
+
+// 门市选择变化处理函数
+function storeSelectChangeHandler() {
+    const storeSelect = document.getElementById('storeSelect');
+    const storeAddress = document.getElementById('storeAddress');
+    const storeAddressText = document.getElementById('storeAddressText');
+    const addressInput = document.getElementById('address');
+    
+    if (storeSelect.value !== '') {
+        const selectedOption = storeSelect.options[storeSelect.selectedIndex];
+        const address = selectedOption.dataset.address;
+        const storeName = selectedOption.textContent;
+        
+        // 显示门市地址
+        storeAddressText.textContent = address;
+        storeAddress.style.display = 'block';
+        
+        // 自动填充詳細地址字段
+        addressInput.value = address;
+        // 设置为只读
+        addressInput.setAttribute('readonly', 'readonly');
+    } else {
+        storeAddress.style.display = 'none';
+        // 清空地址字段
+        addressInput.value = '';
+        // 移除只读属性
+        addressInput.removeAttribute('readonly');
+    }
 }
 
 // ===========================
