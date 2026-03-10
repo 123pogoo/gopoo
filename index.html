@@ -248,8 +248,12 @@
 
                 <div class="form-group" id="storeGroup" style="display:none;">
                     <label>門市 *</label>
-                    <input type="text" id="store" placeholder="查詢門市..." readonly>
-                    <div class="store-list" id="storeList"></div>
+                    <select id="storeSelect" required>
+                        <option value="">-- 選擇門市 --</option>
+                    </select>
+                    <div id="storeAddress" class="store-address" style="display:none;">
+                        <p id="storeAddressText"></p>
+                    </div>
                 </div>
 
                 <div class="form-group">

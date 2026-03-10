@@ -386,12 +386,14 @@ function updateStores() {
     const county = document.getElementById('county').value;
     const district = document.getElementById('district').value;
     const storeGroup = document.getElementById('storeGroup');
-    const storeList = document.getElementById('storeList');
+    const storeSelect = document.getElementById('storeSelect');
+    const storeAddress = document.getElementById('storeAddress');
     
     // 如果是货到付款，隐藏门市选择
     if (shipping === 'cod' || !county || !district) {
         storeGroup.style.display = 'none';
-        storeList.innerHTML = '';
+        storeSelect.innerHTML = '<option value="">-- 選擇門市 --</option>';
+        storeAddress.style.display = 'none';
         return;
     }
     
@@ -430,50 +432,44 @@ function updateStores() {
         const cityStores = storeDatabase[chainKey][countyName];
         if (cityStores && cityStores[district]) {
             // 如果该地区有门市，显示该地区的门市
-            displayStores(cityStores[district], storeList, shippingType);
+            displayStores(cityStores[district], shippingType);
         } else if (cityStores) {
-            // 如果该地区没有门市，显示整个县市的所有门市
+            // 如果该地区没有门市，静默地显示整个县市的所有门市
             let allCityStores = [];
             for (let dist in cityStores) {
                 allCityStores = allCityStores.concat(cityStores[dist]);
             }
             if (allCityStores.length > 0) {
-                const message = '<p style="color: #f39c12; padding: 10px; margin-bottom: 10px; background-color: #fef5e7; border-radius: 4px;">該地區暫無' + shippingType + '門市，以下為' + countyName + '的所有門市：</p>';
-                storeList.innerHTML = message;
-                const storeContainer = document.createElement('div');
-                displayStores(allCityStores, storeContainer, shippingType);
-                storeList.appendChild(storeContainer);
+                displayStores(allCityStores, shippingType);
             } else {
-                storeList.innerHTML = '<p style="color: #999; padding: 10px;">該縣市暫無門市</p>';
+                storeSelect.innerHTML = '<option value="">-- 該縣市暫無門市 --</option>';
+                storeAddress.style.display = 'none';
             }
         } else {
-            storeList.innerHTML = '<p style="color: #999; padding: 10px;">該縣市暫無門市</p>';
+            storeSelect.innerHTML = '<option value="">-- 該縣市暫無門市 --</option>';
+            storeAddress.style.display = 'none';
         }
     } else {
-        storeList.innerHTML = '<p style="color: #999; padding: 10px;">正在加载门市數據...</p>';
+        storeSelect.innerHTML = '<option value="">-- 正在加載門市數據... --</option>';
+        storeAddress.style.display = 'none';
     }
 }
 
 
 
-function displayStores(stores, storeList, shippingType) {
-    // 清空旧的门市列表
-    storeList.innerHTML = '';
+function displayStores(stores, shippingType) {
+    const storeSelect = document.getElementById('storeSelect');
+    const storeAddress = document.getElementById('storeAddress');
+    const storeAddressText = document.getElementById('storeAddressText');
     
     if (stores.length === 0) {
-        storeList.innerHTML = '<p style="color: #999; padding: 10px;">該地區暫無門市</p>';
+        storeSelect.innerHTML = '<option value="">-- 該地區暫無門市 --</option>';
+        storeAddress.style.display = 'none';
         return;
     }
     
-    // 创建门市选择下拉菜单
-    const storeSelect = document.createElement('select');
-    storeSelect.id = 'storeSelect';
-    storeSelect.required = true;
-    storeSelect.style.width = '100%';
-    storeSelect.style.padding = '8px';
-    storeSelect.style.borderRadius = '4px';
-    storeSelect.style.border = '1px solid #ddd';
-    storeSelect.style.fontSize = '14px';
+    // 清空旧的选项
+    storeSelect.innerHTML = '';
     
     const defaultOption = document.createElement('option');
     defaultOption.value = '';
@@ -490,31 +486,17 @@ function displayStores(stores, storeList, shippingType) {
         storeSelect.appendChild(option);
     });
     
-    // 添加门市信息显示
-    const storeInfo = document.createElement('div');
-    storeInfo.id = 'storeInfo';
-    storeInfo.style.marginTop = '10px';
-    storeInfo.style.padding = '10px';
-    storeInfo.style.backgroundColor = '#f9f9f9';
-    storeInfo.style.borderRadius = '4px';
-    storeInfo.style.display = 'none';
-    
+    // 添加选择事件监听
     storeSelect.addEventListener('change', function() {
         if (this.value !== '') {
             const selectedOption = this.options[this.selectedIndex];
             const address = selectedOption.dataset.address;
-            storeInfo.innerHTML = `<strong>地址：</strong>${address}`;
-            storeInfo.style.display = 'block';
-            // 更新隐藏的门市输入框
-            document.getElementById('store').value = selectedOption.textContent;
+            storeAddressText.textContent = address;
+            storeAddress.style.display = 'block';
         } else {
-            storeInfo.style.display = 'none';
-            document.getElementById('store').value = '';
+            storeAddress.style.display = 'none';
         }
     });
-    
-    storeList.appendChild(storeSelect);
-    storeList.appendChild(storeInfo);
 }
 
 // ===========================
