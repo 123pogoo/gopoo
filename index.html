@@ -256,12 +256,16 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" id="addressGroup">
                     <label>詳細地址 *</label>
                     <input type="text" id="address" placeholder="填寫詳細地址，確保宅配可以通過此地址聯繫到您" required>
                 </div>
+                
+                <!-- 隐藏字段：存储配送信息 -->
+                <input type="hidden" id="shippingMethod">
+                <input type="hidden" id="storeInfo">
 
-                <div class="form-group">
+                <div class="form-group" id="remarkGroup">
                     <label>留言（選填）</label>
                     <textarea id="remark" placeholder="留言您的特殊需求或者其它想要告訴我們的事情"></textarea>
                 </div>

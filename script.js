@@ -572,8 +572,19 @@ function submitOrder() {
     const total = currentPrice;
     
     // 验证必填字段
-    if (!name || !phone || !county || !address) {
+    if (!name || !phone || !county) {
         alert('請填寫所有必填欄位！');
+        return;
+    }
+    
+    // 根据配送方式验证
+    if (shipping === 'cod' && !address) {
+        alert('請填寫詳細地址！');
+        return;
+    }
+    
+    if ((shipping === '711' || shipping === 'family') && !document.getElementById('storeSelect').value) {
+        alert('請選擇門市！');
         return;
     }
     
@@ -594,22 +605,34 @@ function submitOrder() {
 
     // 获取当前时间
     const now = new Date();
-    const timestamp = now.toLocaleString('zh-TW');
-
-    // 构建订单数据
+    const timestamp = now.toL    // 根据配送方式构建地址信息
+    let addressInfo = '';
+    if (shipping === 'cod') {
+        addressInfo = `[货到付款] ${address}`;
+    } else if (shipping === '711') {
+        const storeSelect = document.getElementById('storeSelect');
+        const storeName = storeSelect.options[storeSelect.selectedIndex].textContent;
+        addressInfo = `[7-11超商] ${storeName} - ${address}`;
+    } else if (shipping === 'family') {
+        const storeSelect = document.getElementById('storeSelect');
+        const storeName = storeSelect.options[storeSelect.selectedIndex].textContent;
+        addressInfo = `[全家超商] ${storeName} - ${address}`;
+    }
+    
+    // 构建訂单数据
     const orderData = {
+        id: Date.now(),
         timestamp,
         name,
         phone,
         shipping,
         county,
-        address,
+        address: addressInfo,
         remark,
         package: packageType,
         quantity,
         total
     };
-
     // 发送数据到 Google Sheets
     sendToGoogleSheets(orderData);
 }
