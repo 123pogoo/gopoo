@@ -398,9 +398,6 @@ function updateStores() {
     // 显示门市选择
     storeGroup.style.display = 'block';
     
-    // 显示加载中
-    storeList.innerHTML = '<p style="color: #999; padding: 10px;">正在加载门市列表...</p>';
-    
     // 获取县市中文名称
     const countyNames = {
         'taipei': '台北市',
@@ -426,57 +423,22 @@ function updateStores() {
     
     const countyName = countyNames[county];
     const shippingType = shipping === '711' ? '7-11' : '全家';
+    const chainKey = shipping === '711' ? '7-11' : 'family';
     
-    // 调用 API 获取门市数据
-    // 注：全家 API 可用，7-11 使用官方电子地图数据
-    if (shipping === 'family') {
-        fetchFamilyMartStores(countyName, district, storeList, shippingType);
+    // 从本地数据库获取门市
+    if (typeof storeDatabase !== 'undefined' && storeDatabase[chainKey]) {
+        const stores = storeDatabase[chainKey][countyName];
+        if (stores && stores[district]) {
+            displayStores(stores[district], storeList, shippingType);
+        } else {
+            storeList.innerHTML = '<p style="color: #999; padding: 10px;">該地區暫無門市</p>';
+        }
     } else {
-        // 7-11 使用本地数据（因为官方 API 需要特殊权限）
-        fetch711Stores(county, district, storeList, shippingType);
+        storeList.innerHTML = '<p style="color: #999; padding: 10px;">正在加载门市數據...</p>';
     }
 }
 
-function fetchFamilyMartStores(countyName, district, storeList, shippingType) {
-    // 使用开源 API 获取全家门市数据
-    const apiUrl = `https://cvs-api-tw.herokuapp.com/fm_bycity/${countyName}`;
-    
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-            if (!data.store || data.store.length === 0) {
-                storeList.innerHTML = '<p style="color: #999; padding: 10px;">該地區暫無門市</p>';
-                return;
-            }
-            
-            // 筛选该地区的门市
-            const districtStores = data.store.filter(store => store.address.includes(district));
-            
-            if (districtStores.length === 0) {
-                // 如果该地区没有门市，显示整个县市的门市
-                displayStores(data.store, storeList, shippingType);
-            } else {
-                displayStores(districtStores, storeList, shippingType);
-            }
-        })
-        .catch(error => {
-            console.error('API 错误:', error);
-            storeList.innerHTML = '<p style="color: #999; padding: 10px;">無法加載門市數據，請稍後重試</p>';
-        });
-}
 
-function fetch711Stores(county, district, storeList, shippingType) {
-    // 7-11 使用本地数据
-    const countyKey = county;
-    const stores = storeData['711'][countyKey] || [];
-    
-    if (stores.length === 0) {
-        storeList.innerHTML = '<p style="color: #999; padding: 10px;">該地區暫無門市</p>';
-        return;
-    }
-    
-    displayStores(stores, storeList, shippingType);
-}
 
 function displayStores(stores, storeList, shippingType) {
     // 清空旧的门市列表
