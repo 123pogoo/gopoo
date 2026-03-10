@@ -358,6 +358,7 @@ function updateDistricts() {
     
     if (!selectedCounty) {
         districtGroup.style.display = 'none';
+        document.getElementById('storeGroup').style.display = 'none';
         return;
     }
     
@@ -374,6 +375,90 @@ function updateDistricts() {
     if (districts.length > 0) {
         districtGroup.style.display = 'block';
     }
+    
+    // 清空门市列表
+    document.getElementById('storeGroup').style.display = 'none';
+    document.getElementById('storeList').innerHTML = '';
+}
+
+function updateStores() {
+    const shipping = document.querySelector('input[name="shipping"]:checked').value;
+    const county = document.getElementById('county').value;
+    const district = document.getElementById('district').value;
+    const storeGroup = document.getElementById('storeGroup');
+    const storeList = document.getElementById('storeList');
+    
+    // 如果是货到付款，隐藏门市选择
+    if (shipping === 'cod' || !county || !district) {
+        storeGroup.style.display = 'none';
+        storeList.innerHTML = '';
+        return;
+    }
+    
+    // 显示门市选择
+    storeGroup.style.display = 'block';
+    
+    const shippingType = shipping === '711' ? '711' : 'family';
+    const countyKey = county;
+    const stores = storeData[shippingType][countyKey] || [];
+    
+    // 清空旧的门市列表
+    storeList.innerHTML = '';
+    
+    if (stores.length === 0) {
+        storeList.innerHTML = '<p style="color: #999; padding: 10px;">該地區暫無門市</p>';
+        return;
+    }
+    
+    // 创建门市选择下拉菜单
+    const storeSelect = document.createElement('select');
+    storeSelect.id = 'storeSelect';
+    storeSelect.required = true;
+    storeSelect.style.width = '100%';
+    storeSelect.style.padding = '8px';
+    storeSelect.style.borderRadius = '4px';
+    storeSelect.style.border = '1px solid #ddd';
+    storeSelect.style.fontSize = '14px';
+    
+    const defaultOption = document.createElement('option');
+    defaultOption.value = '';
+    defaultOption.textContent = `-- 選擇${shippingType === '711' ? '7-11' : '全家'}門市 --`;
+    storeSelect.appendChild(defaultOption);
+    
+    // 添加门市选项
+    stores.forEach(store => {
+        const option = document.createElement('option');
+        option.value = store.id;
+        option.textContent = `${store.name}`;
+        option.dataset.address = store.address;
+        storeSelect.appendChild(option);
+    });
+    
+    // 添加门市信息显示
+    const storeInfo = document.createElement('div');
+    storeInfo.id = 'storeInfo';
+    storeInfo.style.marginTop = '10px';
+    storeInfo.style.padding = '10px';
+    storeInfo.style.backgroundColor = '#f9f9f9';
+    storeInfo.style.borderRadius = '4px';
+    storeInfo.style.display = 'none';
+    
+    storeSelect.addEventListener('change', function() {
+        if (this.value) {
+            const selectedOption = this.options[this.selectedIndex];
+            const address = selectedOption.dataset.address;
+            storeInfo.innerHTML = `<strong>地址：</strong>${address}`;
+            storeInfo.style.display = 'block';
+            // 更新隐藏的门市输入框
+            document.getElementById('store').value = selectedOption.textContent;
+        } else {
+            storeInfo.style.display = 'none';
+            document.getElementById('store').value = '';
+        }
+    });
+    
+    storeList.appendChild(storeSelect);
+    storeList.appendChild(storeInfo);
 }
 
 // ===========================
@@ -395,6 +480,32 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 初始化配送方式
     updateShippingInfo();
+    
+    // 添加地区变化监听
+    const districtSelect = document.getElementById('district');
+    if (districtSelect) {
+        districtSelect.addEventListener('change', function() {
+            updateStores();
+        });
+    }
+    
+    // 添加配送方式变化监听
+    const shippingRadios = document.querySelectorAll('input[name="shipping"]');
+    shippingRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            updateShippingInfo();
+            updateStores();
+        });
+    });
+    
+    // 添加县市变化监听
+    const countySelect = document.getElementById('county');
+    if (countySelect) {
+        countySelect.addEventListener('change', function() {
+            updateDistricts();
+            updateStores();
+        });
+    }
 });
 
 function initFloatingButton() {
