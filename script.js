@@ -427,11 +427,27 @@ function updateStores() {
     
     // 从本地数据库获取门市
     if (typeof storeDatabase !== 'undefined' && storeDatabase[chainKey]) {
-        const stores = storeDatabase[chainKey][countyName];
-        if (stores && stores[district]) {
-            displayStores(stores[district], storeList, shippingType);
+        const cityStores = storeDatabase[chainKey][countyName];
+        if (cityStores && cityStores[district]) {
+            // 如果该地区有门市，显示该地区的门市
+            displayStores(cityStores[district], storeList, shippingType);
+        } else if (cityStores) {
+            // 如果该地区没有门市，显示整个县市的所有门市
+            let allCityStores = [];
+            for (let dist in cityStores) {
+                allCityStores = allCityStores.concat(cityStores[dist]);
+            }
+            if (allCityStores.length > 0) {
+                const message = '<p style="color: #f39c12; padding: 10px; margin-bottom: 10px; background-color: #fef5e7; border-radius: 4px;">該地區暫無' + shippingType + '門市，以下為' + countyName + '的所有門市：</p>';
+                storeList.innerHTML = message;
+                const storeContainer = document.createElement('div');
+                displayStores(allCityStores, storeContainer, shippingType);
+                storeList.appendChild(storeContainer);
+            } else {
+                storeList.innerHTML = '<p style="color: #999; padding: 10px;">該縣市暫無門市</p>';
+            }
         } else {
-            storeList.innerHTML = '<p style="color: #999; padding: 10px;">該地區暫無門市</p>';
+            storeList.innerHTML = '<p style="color: #999; padding: 10px;">該縣市暫無門市</p>';
         }
     } else {
         storeList.innerHTML = '<p style="color: #999; padding: 10px;">正在加载门市數據...</p>';
