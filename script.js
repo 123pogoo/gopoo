@@ -398,10 +398,87 @@ function updateStores() {
     // 显示门市选择
     storeGroup.style.display = 'block';
     
-    const shippingType = shipping === '711' ? '711' : 'family';
-    const countyKey = county;
-    const stores = storeData[shippingType][countyKey] || [];
+    // 显示加载中
+    storeList.innerHTML = '<p style="color: #999; padding: 10px;">正在加载门市列表...</p>';
     
+    // 获取县市中文名称
+    const countyNames = {
+        'taipei': '台北市',
+        'newtaipei': '新北市',
+        'taoyuan': '桃園市',
+        'hsinchu': '新竹市',
+        'miaoli': '苗栗縣',
+        'taichung': '台中市',
+        'changhua': '彰化縣',
+        'nantou': '南投縣',
+        'yunlin': '雲林縣',
+        'chiayi': '嘉義市',
+        'tainan': '台南市',
+        'kaohsiung': '高雄市',
+        'pingtung': '屏東縣',
+        'taitung': '台東縣',
+        'hualien': '花蓮縣',
+        'yilan': '宜蘭縣',
+        'penghu': '澎湖縣',
+        'kinmen': '金門縣',
+        'lienchiang': '連江縣'
+    };
+    
+    const countyName = countyNames[county];
+    const shippingType = shipping === '711' ? '7-11' : '全家';
+    
+    // 调用 API 获取门市数据
+    // 注：全家 API 可用，7-11 使用官方电子地图数据
+    if (shipping === 'family') {
+        fetchFamilyMartStores(countyName, district, storeList, shippingType);
+    } else {
+        // 7-11 使用本地数据（因为官方 API 需要特殊权限）
+        fetch711Stores(county, district, storeList, shippingType);
+    }
+}
+
+function fetchFamilyMartStores(countyName, district, storeList, shippingType) {
+    // 使用开源 API 获取全家门市数据
+    const apiUrl = `https://cvs-api-tw.herokuapp.com/fm_bycity/${countyName}`;
+    
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            if (!data.store || data.store.length === 0) {
+                storeList.innerHTML = '<p style="color: #999; padding: 10px;">該地區暫無門市</p>';
+                return;
+            }
+            
+            // 筛选该地区的门市
+            const districtStores = data.store.filter(store => store.address.includes(district));
+            
+            if (districtStores.length === 0) {
+                // 如果该地区没有门市，显示整个县市的门市
+                displayStores(data.store, storeList, shippingType);
+            } else {
+                displayStores(districtStores, storeList, shippingType);
+            }
+        })
+        .catch(error => {
+            console.error('API 错误:', error);
+            storeList.innerHTML = '<p style="color: #999; padding: 10px;">無法加載門市數據，請稍後重試</p>';
+        });
+}
+
+function fetch711Stores(county, district, storeList, shippingType) {
+    // 7-11 使用本地数据
+    const countyKey = county;
+    const stores = storeData['711'][countyKey] || [];
+    
+    if (stores.length === 0) {
+        storeList.innerHTML = '<p style="color: #999; padding: 10px;">該地區暫無門市</p>';
+        return;
+    }
+    
+    displayStores(stores, storeList, shippingType);
+}
+
+function displayStores(stores, storeList, shippingType) {
     // 清空旧的门市列表
     storeList.innerHTML = '';
     
@@ -422,14 +499,15 @@ function updateStores() {
     
     const defaultOption = document.createElement('option');
     defaultOption.value = '';
-    defaultOption.textContent = `-- 選擇${shippingType === '711' ? '7-11' : '全家'}門市 --`;
+    defaultOption.textContent = `-- 選擇${shippingType}門市 --`;
     storeSelect.appendChild(defaultOption);
     
     // 添加门市选项
-    stores.forEach(store => {
+    stores.forEach((store, index) => {
         const option = document.createElement('option');
-        option.value = store.id;
-        option.textContent = `${store.name}`;
+        option.value = index;
+        const storeName = store.name || store.store_name || '門市';
+        option.textContent = storeName;
         option.dataset.address = store.address;
         storeSelect.appendChild(option);
     });
@@ -444,7 +522,7 @@ function updateStores() {
     storeInfo.style.display = 'none';
     
     storeSelect.addEventListener('change', function() {
-        if (this.value) {
+        if (this.value !== '') {
             const selectedOption = this.options[this.selectedIndex];
             const address = selectedOption.dataset.address;
             storeInfo.innerHTML = `<strong>地址：</strong>${address}`;
