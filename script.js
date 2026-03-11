@@ -669,12 +669,21 @@ function submitOrder() {
     
     // 跟踪 Facebook 购买事件
     if (typeof fbq !== 'undefined') {
+        // 跟踪购买事件
         fbq('track', 'Purchase', {
             value: total,
             currency: 'TWD',
             content_name: packageType,
             content_type: 'product',
-            content_ids: [packageType]
+            content_ids: [packageType],
+            num_items: quantity
+        });
+        
+        // 跟踪完成注册事件（用于转化优化）
+        fbq('track', 'CompleteRegistration', {
+            status: 'completed',
+            value: total,
+            currency: 'TWD'
         });
     }
     

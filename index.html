@@ -16,10 +16,21 @@
       t.src=v;s=b.getElementsByTagName(e)[0];
       s.parentNode.insertBefore(t,s)}(window, document,'script',
       'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '1234567890'); // 请替换为您的 Pixel ID
+      fbq('init', '116870652863618'); // GOPOO 商业账户 ID
       fbq('track', 'PageView');
+      
+      // 追踪自定义事件
+      window.addEventListener('load', function() {
+        // 追踪产品浏览
+        fbq('track', 'ViewContent', {
+          content_name: 'GOPOO Qi2 无线充电器',
+          content_type: 'product',
+          value: 999,
+          currency: 'TWD'
+        });
+      });
     </script>
-    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1234567890&ev=PageView&noscript=1" /></noscript>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=116870652863618&ev=PageView&noscript=1" /></noscript>
 </head>
 <body>
     <!-- 顶部导航栏 -->
