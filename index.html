@@ -6,6 +6,31 @@
     <title>GOPOO - Qi2 旋轉魔方三合一無線充電器</title>
     <link rel="stylesheet" href="styles.css">
     
+    <!-- Google Analytics 代码 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J8HKTRYFDS"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-J8HKTRYFDS');
+      
+      // 追踪页面浏览
+      gtag('event', 'page_view', {
+        'page_title': document.title,
+        'page_path': window.location.pathname
+      });
+      
+      // 追踪用户交互
+      document.addEventListener('click', function(e) {
+        if (e.target.closest('button, a')) {
+          gtag('event', 'click', {
+            'element': e.target.tagName,
+            'text': e.target.textContent
+          });
+        }
+      });
+    </script>
+    
     <!-- Facebook Pixel 代码 -->
     <script>
       !function(f,b,e,v,n,t,s)

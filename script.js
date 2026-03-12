@@ -40,12 +40,41 @@ function addToCart() {
 
     cart.push(item);
     saveCart();
+    
+    // 追踪 GA 事件
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'add_to_cart', {
+            'value': currentPrice,
+            'currency': 'TWD',
+            'items': [{
+                'item_id': packageType,
+                'item_name': '旋轉魔方三合一無線充電器',
+                'price': currentPrice,
+                'quantity': quantity
+            }]
+        });
+    }
+    
     alert('已加入購物車！');
 }
 
 // 立即购买
 function buyNow() {
     addToCart();
+    
+    // 追踪 GA 事件
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'view_item', {
+            'value': currentPrice,
+            'currency': 'TWD',
+            'items': [{
+                'item_id': document.getElementById('packageSelect').value,
+                'item_name': '旋轉魔方三合一無線充電器',
+                'price': currentPrice
+            }]
+        });
+    }
+    
     scrollToCheckout();
 }
 
@@ -105,6 +134,20 @@ function changeImage(src, index) {
 
 function scrollToCheckout() {
     const checkoutSection = document.querySelector('.checkout-section');
+    
+    // 追踪 GA 结账开始事件
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'begin_checkout', {
+            'value': currentPrice,
+            'currency': 'TWD',
+            'items': [{
+                'item_id': document.getElementById('packageSelect').value,
+                'item_name': '旋轉魔方三合一無線充電器',
+                'price': currentPrice
+            }]
+        });
+    }
+    
     checkoutSection.scrollIntoView({ behavior: 'smooth' });
 }
 
@@ -138,6 +181,19 @@ function validatePhone(phone) {
 // 监听手机号码输入
 document.addEventListener('DOMContentLoaded', function() {
     const phoneInput = document.getElementById('phone');
+    
+    // 追踪表单字段交互
+    const formInputs = document.querySelectorAll('#orderForm input, #orderForm select, #orderForm textarea');
+    formInputs.forEach(input => {
+        input.addEventListener('change', function() {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'form_interaction', {
+                    'field_name': this.id || this.name,
+                    'field_type': this.type
+                });
+            }
+        });
+    });
     const phoneError = document.getElementById('phoneError');
     
     if (phoneInput) {
@@ -180,6 +236,13 @@ function updateShippingInfo() {
     const shippingValue = document.querySelector('input[name="shipping"]:checked').value;
     const addressGroup = document.getElementById('addressGroup');
     const addressInput = document.getElementById('address');
+    
+    // 追踪 GA 事件
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'select_shipping', {
+            'shipping_method': shippingValue
+        });
+    }
     
     if (shippingValue === 'cod') {
         shippingInfo.innerHTML = '<p>✓ 全台配送</p>';
@@ -539,6 +602,19 @@ function storeSelectChangeHandler() {
 document.addEventListener('DOMContentLoaded', function() {
     const orderForm = document.getElementById('orderForm');
     
+    // 追踪表单字段交互
+    const formInputs = document.querySelectorAll('#orderForm input, #orderForm select, #orderForm textarea');
+    formInputs.forEach(input => {
+        input.addEventListener('change', function() {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'form_interaction', {
+                    'field_name': this.id || this.name,
+                    'field_type': this.type
+                });
+            }
+        });
+    });
+    
     if (orderForm) {
         orderForm.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -684,6 +760,25 @@ function submitOrder() {
             status: 'completed',
             value: total,
             currency: 'TWD'
+        });
+    }
+    
+    
+    // 追踪 Google Analytics 购买事件
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'purchase', {
+            'transaction_id': orderData.id,
+            'value': total,
+            'currency': 'TWD',
+            'tax': 0,
+            'shipping': 0,
+            'items': [{
+                'item_id': packageType,
+                'item_name': '旋轉魔方三合一無線充電器',
+                'price': total,
+                'quantity': quantity
+            }],
+            'shipping_method': shipping
         });
     }
     
